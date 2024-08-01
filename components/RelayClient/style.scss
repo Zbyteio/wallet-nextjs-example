@@ -1,0 +1,31 @@
+.relay-client {
+	margin-block-start: 20px;
+
+	.button {
+		--fg: #673584;
+		font-size: 1em;
+
+		&:not(:first-child) { margin-inline-start: 8px; }
+	}
+
+	pre { overflow: scroll; }
+
+	.loader {
+		z-index: 999;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgb(251, 243, 255, 90%);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		backdrop-filter: blur(2px);
+
+		.spinner {
+			--width: 200px;
+			--thickness: 4px;
+		}
+	}
+}

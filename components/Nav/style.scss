@@ -1,0 +1,41 @@
+.nav {
+	z-index: 1;
+	position: sticky;
+	top: 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 8px;
+	background: rgb(245 242 253 / 85%);
+	backdrop-filter: blur(8px);
+
+	.logo {
+		width: 150px;
+		height: auto;
+	}
+
+	.links {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.link {
+		color: black;
+		transition: color 0.2s ease;
+		text-decoration: none;
+    font-size: 1em;
+
+		&:hover {
+			color: #441872;
+		}
+
+		&:is(button) {
+			background: none;
+			border: none;
+		}
+	}
+}
