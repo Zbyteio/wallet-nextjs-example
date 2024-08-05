@@ -1,11 +1,21 @@
 // Import necessary modules and components
 import { useContext, useState } from 'react';
+import { CHAIN_ID_MATIC_MAINNET, CHAIN_ID_HBAR_MAINNET, CHAIN_ID_AVAX_MAINNET } from '@zbyteio/zbyte-common'; // Import chain ID for Matic Mainnet
 import { PendingState } from '@/types'; // Import PendingState enum/type from your types
 import { WalletContext } from '@/contexts/Wallet'; // Import WalletContext for accessing wallet state
 import Spinner from '@/components/Spinner'; // Import Spinner component for loading state
 import relay from './relay'; // Import relay function
 import './style.scss'; // Import stylesheet
-import { abi, bytecode, functionSignature, exampleContractAddress, exampleWalletAddress, exampleURI } from './constants'; // Import constants
+import {
+	abi,
+	bytecode,
+	functionSignature,
+	exampleContractAddressPolygon,
+	exampleContractAddressAvalanche,
+	exampleContractAddressHedera,
+	exampleWalletAddress,
+	exampleURI
+} from './constants'; // Import constants
 import { ethers } from 'ethers'; // Import ethers for handling Ethereum-related functions
 import { getChainId } from '@/components/globals'; // Import global variable functions
 
@@ -41,6 +51,7 @@ export default function RelayButtons() {
 		}
 	};
 
+
 	// Function to invoke a contract
 	const invokeContract = async () => {
 		if (!wallet.core || wallet.connected !== PendingState.Yes) { // Check if the wallet is connected
@@ -51,7 +62,17 @@ export default function RelayButtons() {
 		try {
 			setLoading(prev => ({ ...prev, invoke: true })); // Set loading state for invoke operation
 			setOperationResult(null); // Clear previous operation result
-			const result = await relay(wallet.core).invokeContract(functionSignature, exampleContractAddress, abi, [exampleWalletAddress, exampleURI], chain); // Invoke contract
+
+			const chainId = getChainId();
+			const contractAddress = {
+				[CHAIN_ID_MATIC_MAINNET]: exampleContractAddressPolygon,
+				[CHAIN_ID_AVAX_MAINNET]: exampleContractAddressAvalanche,
+				[CHAIN_ID_HBAR_MAINNET]: exampleContractAddressHedera,
+			}[chainId as string];
+
+			if (!contractAddress) throw new Error(`Unable find contract for chain "${chainId}".`);
+
+			const result = await relay(wallet.core).invokeContract(functionSignature, contractAddress, abi, [exampleWalletAddress, exampleURI], chain); // Invoke contract
 			console.log('Invoke Contract Result:', result);
 			setOperationResult(result); // Set operation result state
 		} catch (error) {
