@@ -10,44 +10,51 @@ This project is a Next.js example application demonstrating the use of the zbyte
 - [Usage](#usage)
 - [Scripts](#scripts)
 - [Project Structure](#project-structure)
-- [Node.js Version](#nodejs-version)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Getting Started
 
 Follow these instructions to set up and run the project on your local machine.
 
-### Prerequisites
+## Prerequisites
 
 - [Node.js](https://nodejs.org/) (version 20.15.0 or lower)
 - [nvm (Node Version Manager)](https://github.com/nvm-sh/nvm) for managing Node.js versions
 
-### Installation
+## Installation
 
 1. Clone the repository:
 
    ```sh
    git clone https://github.com/yourusername/wallet-nextjs-example.git
    cd wallet-nextjs-example
+   ```
 
 2. Use nvm to ensure you're using the correct Node.js version:
 
+    ```
     nvm use
+    ```
 
-3. Install the depencies:
+3. Install the dependencies:
 
+    ```
     npm install
+    ```
 
-### Usage
+## Usage
 
 1. Ensure the provided .env file is in the root directory.
 
 2. Start the development server:
 
+    ```
     npm run dev
+    ```
 
 3. Open your browser and navigate to http://localhost:3000 to see the application.
+
+4. Select a chain before logging in.
 
 ## Scripts
 
